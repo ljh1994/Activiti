@@ -7,7 +7,7 @@
   <!-- USER INSERT -->
 
   <insert id="insertUser" parameterType="org.activiti.engine.impl.persistence.entity.UserEntityImpl">
-    insert into ${prefix}ACT_ID_USER (ID_, REV_, FIRST_, LAST_, EMAIL_, PWD_)
+    insert into "ganbu1"."ACT_ID_USER" ("ID_", "REV_", "FIRST_", "LAST_", "EMAIL_", "PWD_")
     values (
       #{id ,jdbcType=VARCHAR},
       1,
@@ -19,7 +19,7 @@
   </insert>
 
   <insert id="bulkInsertUser" parameterType="java.util.List">
-    INSERT INTO ${prefix}ACT_ID_USER (ID_, REV_, FIRST_, LAST_, EMAIL_, PWD_) VALUES 
+    INSERT INTO "ganbu1"."ACT_ID_USER" ("ID_", "REV_", "FIRST_", "LAST_", "EMAIL_", "PWD_") VALUES
       <foreach collection="list" item="user" index="index" separator=",">
         (#{user.id ,jdbcType=VARCHAR},
          1,
@@ -33,7 +33,7 @@
   <insert id="bulkInsertUser" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="user" index="index">
-        INTO ${prefix}ACT_ID_USER (ID_, REV_, FIRST_, LAST_, EMAIL_, PWD_) VALUES 
+        INTO "ganbu1"."ACT_ID_USER" ("ID_", "REV_", "FIRST_", "LAST_", "EMAIL_", "PWD_") VALUES
         (#{user.id ,jdbcType=VARCHAR},
          1,
          #{user.firstName ,jdbcType=VARCHAR},
@@ -47,21 +47,21 @@
   <!-- USER UPDATE -->
 
   <update id="updateUser" parameterType="org.activiti.engine.impl.persistence.entity.UserEntityImpl">
-    update ${prefix}ACT_ID_USER set
-      REV_ = #{revisionNext ,jdbcType=INTEGER},
-      FIRST_ = #{firstName ,jdbcType=VARCHAR},
-      LAST_ = #{lastName ,jdbcType=VARCHAR},
-      EMAIL_ = #{email ,jdbcType=VARCHAR},
-      PWD_ = #{password ,jdbcType=VARCHAR},
-      PICTURE_ID_ = #{pictureByteArrayRef ,typeHandler=ByteArrayRefTypeHandler}
-    where ID_ = #{id}
-      and REV_ = #{revision}
+    update "ganbu1"."ACT_ID_USER" set
+      "REV_" = #{revisionNext ,jdbcType=INTEGER},
+      "FIRST_" = #{firstName ,jdbcType=VARCHAR},
+      "LAST_" = #{lastName ,jdbcType=VARCHAR},
+      "EMAIL_" = #{email ,jdbcType=VARCHAR},
+      "PWD_" = #{password ,jdbcType=VARCHAR},
+      "PICTURE_ID_" = #{pictureByteArrayRef ,typeHandler=ByteArrayRefTypeHandler}
+    where "ID_" = #{id}
+      and "REV_" = #{revision}
   </update>
   
   <!-- USER DELETE -->
 
   <delete id="deleteUser" parameterType="org.activiti.engine.impl.persistence.entity.UserEntityImpl">
-    delete from ${prefix}ACT_ID_USER where ID_ = #{id} and REV_ = #{revision}
+    delete from "ganbu1"."ACT_ID_USER" where "ID_" = #{id} and "REV_" = #{revision}
   </delete>
 
   <!-- USER RESULTMAP -->
@@ -79,7 +79,7 @@
   <!-- USER SELECT -->
 
   <select id="selectUser" parameterType="string" resultMap="userResultMap">
-    select * from ${prefix}ACT_ID_USER where ID_ = #{id,jdbcType=VARCHAR}
+    select * from "ganbu1"."ACT_ID_USER" where "ID_" = #{id,jdbcType=VARCHAR}
   </select>
     
   <select id="selectUserByQueryCriteria" parameterType="org.activiti.engine.impl.UserQueryImpl" resultMap="userResultMap">
@@ -91,46 +91,48 @@
   </select>
   
    <select id="selectUserCountByQueryCriteria" parameterType="org.activiti.engine.impl.UserQueryImpl" resultType="long">
-    select count(RES.ID_)
+    select count(RES."ID_")
     <include refid="selectUserByQueryCriteriaSql" />
   </select>
   
   <sql id="selectUserByQueryCriteriaSql">
-    from ${prefix}ACT_ID_USER RES 
+    from "ganbu1"."ACT_ID_USER" RES 
     <if test="groupId != null">
-      inner join ${prefix}ACT_ID_MEMBERSHIP M on RES.ID_ = M.USER_ID_
-      inner join ${prefix}ACT_ID_GROUP G on M.GROUP_ID_ = G.ID_
+      inner join "ganbu1"."ACT_ID_MEMBERSHIP" M on RES."ID_" = M."USER_ID_"
+      inner join "ganbu1"."ACT_ID_GROUP" G on M."GROUP_ID_" = G."ID_"
     </if>
     <where>
       <if test="id != null">
-        RES.ID_ = #{id}
+        RES."ID_" = #{id}
       </if>
       <if test="firstName != null">
-        and RES.FIRST_ = #{firstName}
+        and RES."FIRST_" = #{firstName}
       </if>
       <if test="firstNameLike != null">
-        and RES.FIRST_ like #{firstNameLike}${wildcardEscapeClause}
+        and RES."FIRST_" like #{firstNameLike}${wildcardEscapeClause}
       </if>
       <if test="lastName != null">
-        and RES.LAST_ = #{lastName}
+        and RES."LAST_" = #{lastName}
       </if>
       <if test="lastNameLike != null">
-        and RES.LAST_ like #{lastNameLike}${wildcardEscapeClause}
+        and RES."LAST_" like #{lastNameLike}${wildcardEscapeClause}
       </if>
       <if test="fullNameLike != null">
-        and (RES.FIRST_ like #{fullNameLike}${wildcardEscapeClause} or RES.LAST_ like #{fullNameLike}${wildcardEscapeClause})
+        and (RES."FIRST_" like #{fullNameLike}${wildcardEscapeClause}
+            or RES."LAST_" like #{fullNameLike}${wildcardEscapeClause})
       </if>
       <if test="email != null">
-        and RES.EMAIL_ = #{email}
+        and RES."EMAIL_" = #{email}
       </if>
       <if test="emailLike != null">
-        and RES.EMAIL_ like #{emailLike}${wildcardEscapeClause}
+        and RES."EMAIL_" like #{emailLike}${wildcardEscapeClause}
       </if>
       <if test="groupId != null">
-        and G.ID_ = #{groupId}
+        and G."ID_" = #{groupId}
       </if>
       <if test="procDefId != null">
-        and exists (select ID_ from ${prefix}ACT_RU_IDENTITYLINK where PROC_DEF_ID_ = #{procDefId} and USER_ID_=RES.ID_ )
+        and exists (select "ID_" from "ganbu1"."ACT_RU_IDENTITYLINK"
+            where "PROC_DEF_ID_" = #{procDefId} and "USER_ID_"=RES.ID_ )
       </if>
       
     </where>

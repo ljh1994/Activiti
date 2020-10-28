@@ -21,7 +21,7 @@
   <!-- COMMENT INSERT -->
 
   <insert id="insertComment" parameterType="org.activiti.engine.impl.persistence.entity.CommentEntityImpl">
-    insert into ${prefix}ACT_HI_COMMENT (ID_, TYPE_, TIME_, USER_ID_, TASK_ID_, PROC_INST_ID_, ACTION_, MESSAGE_, FULL_MSG_)
+    insert into "ganbu1"."ACT_HI_COMMENT" ("ID_", "TYPE_", "TIME_", "USER_ID_", "TASK_ID_", "PROC_INST_ID_", "ACTION_", "MESSAGE_", "FULL_MSG_")
     values (#{id ,jdbcType=VARCHAR},
       #{type ,jdbcType=VARCHAR},
       #{time ,jdbcType=TIMESTAMP},
@@ -34,7 +34,7 @@
   </insert>
 
   <insert id="bulkInsertComment" parameterType="java.util.List">
-    insert into ${prefix}ACT_HI_COMMENT (ID_, TYPE_, TIME_, USER_ID_, TASK_ID_, PROC_INST_ID_, ACTION_, MESSAGE_, FULL_MSG_)
+    insert into "ganbu1"."ACT_HI_COMMENT" ("ID_", "TYPE_", "TIME_", "USER_ID_", "TASK_ID_", "PROC_INST_ID_", "ACTION_", "MESSAGE_", "FULL_MSG_")
     values 
       <foreach collection="list" item="comment" index="index" separator=",">
         (#{comment.id ,jdbcType=VARCHAR},
@@ -52,7 +52,7 @@
   <insert id="bulkInsertComment" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="comment" index="index">
-        into ${prefix}ACT_HI_COMMENT (ID_, TYPE_, TIME_, USER_ID_, TASK_ID_, PROC_INST_ID_, ACTION_, MESSAGE_, FULL_MSG_) VALUES 
+        into "ganbu1"."ACT_HI_COMMENT" ("ID_", "TYPE_", "TIME_", "USER_ID_", "TASK_ID_", "PROC_INST_ID_", "ACTION_", "MESSAGE_", "FULL_MSG_") VALUES
           (#{comment.id ,jdbcType=VARCHAR},
            #{comment.type ,jdbcType=VARCHAR},
            #{comment.time ,jdbcType=TIMESTAMP},
@@ -69,15 +69,15 @@
   <!-- COMMENT DELETE -->
 
   <delete id="deleteComment" parameterType="string">
-    delete from ${prefix}ACT_HI_COMMENT where ID_ = #{id}
+    delete from "ganbu1"."ACT_HI_COMMENT" where "ID_" = #{id}
   </delete>
 
   <delete id="deleteCommentsByTaskId" parameterType="string">
-    delete from ${prefix}ACT_HI_COMMENT where TASK_ID_ = #{taskId} 
+    delete from "ganbu1"."ACT_HI_COMMENT" where "TASK_ID_" = #{taskId}
   </delete>
 
   <delete id="deleteCommentsByProcessInstanceId" parameterType="string">
-    delete from ${prefix}ACT_HI_COMMENT where PROC_INST_ID_ = #{processInstanceId} 
+    delete from "ganbu1"."ACT_HI_COMMENT" where "PROC_INST_ID_" = #{processInstanceId}
   </delete>
   
   <!-- COMMENT RESULTMAP -->
@@ -98,60 +98,60 @@
 
   <select id="selectComment" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
     select * 
-    from ${prefix}ACT_HI_COMMENT 
+    from "ganbu1"."ACT_HI_COMMENT" 
     where ID_ = #{parameter,jdbcType=VARCHAR}
   </select>
   
   <select id="selectCommentsByTaskId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
     select * 
-    from ${prefix}ACT_HI_COMMENT 
-    where TASK_ID_ = #{parameter,jdbcType=VARCHAR}
-      and TYPE_ = 'comment'
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_COMMENT" 
+    where "TASK_ID_" = #{parameter,jdbcType=VARCHAR}
+      and "TYPE_" = 'comment'
+    order by "TIME_" desc
   </select>
   
   <select id="selectCommentsByTaskIdAndType" parameterType="java.util.Map" resultMap="commentResultMap">
   	select *
-  	from ${prefix}ACT_HI_COMMENT
-  	where TASK_ID_ = #{taskId,jdbcType=VARCHAR}
-  		and TYPE_ = #{type,jdbcType=VARCHAR}
-  	order by TIME_ desc
+  	from "ganbu1"."ACT_HI_COMMENT"
+  	where "TASK_ID_" = #{taskId,jdbcType=VARCHAR}
+  		and "TYPE_" = #{type,jdbcType=VARCHAR}
+  	order by "TIME_" desc
   </select>
   
   <select id="selectCommentsByType" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
   	select *
-  	from ${prefix}ACT_HI_COMMENT
-  	where TYPE_ = #{parameter,jdbcType=VARCHAR}
-  	order by TIME_ desc
+  	from "ganbu1"."ACT_HI_COMMENT"
+  	where "TYPE_" = #{parameter,jdbcType=VARCHAR}
+  	order by "TIME_" desc
   </select>
   
   <select id="selectEventsByTaskId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
     select * 
-    from ${prefix}ACT_HI_COMMENT 
-    where TASK_ID_ = #{parameter,jdbcType=VARCHAR}
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_COMMENT" 
+    where "TASK_ID_" = #{parameter,jdbcType=VARCHAR}
+    order by "TIME_" desc
   </select>
   
   <select id="selectEventsByProcessInstanceId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
     select * 
-    from ${prefix}ACT_HI_COMMENT 
-    where PROC_INST_ID_ = #{parameter,jdbcType=VARCHAR}
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_COMMENT" 
+    where "PROC_INST_ID_" = #{parameter,jdbcType=VARCHAR}
+    order by "TIME_" desc
   </select>
 
   <select id="selectCommentsByProcessInstanceId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
     select * 
-    from ${prefix}ACT_HI_COMMENT 
-    where PROC_INST_ID_ = #{parameter,jdbcType=VARCHAR}
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_COMMENT" 
+    where "PROC_INST_ID_" = #{parameter,jdbcType=VARCHAR}
+    order by "TIME_" desc
   </select>
 
   <select id="selectCommentsByProcessInstanceIdAndType" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="commentResultMap">
     select *
-    from ${prefix}ACT_HI_COMMENT
-    where PROC_INST_ID_ = #{processInstanceId,jdbcType=VARCHAR}
-    and TYPE_ = #{type,jdbcType=VARCHAR}
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_COMMENT"
+    where "PROC_INST_ID_" = #{processInstanceId,jdbcType=VARCHAR}
+    and "TYPE_" = #{type,jdbcType=VARCHAR}
+    order by "TIME_" desc
   </select>
 
 </mapper>

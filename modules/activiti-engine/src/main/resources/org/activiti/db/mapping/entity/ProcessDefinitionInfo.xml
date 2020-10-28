@@ -68,7 +68,7 @@
   </select>
   
   <select id="selectProcessDefinitionInfoByProcessDefinitionId" parameterType="string" resultMap="processDefinitionInfoResultMap">
-    select * from ${prefix}ACT_PROCDEF_INFO where PROC_DEF_ID_ = #{processDefinitionId}
+    select * from "ganbu1"."ACT_PROCDEF_INFO" where "PROC_DEF_ID_" = #{processDefinitionId}
   </select>
 
 </mapper>

@@ -12,9 +12,6 @@
  */
 package org.activiti.engine.impl;
 
-import java.io.Serializable;
-import java.util.List;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.ActivitiIllegalArgumentException;
 import org.activiti.engine.ManagementService;
@@ -26,6 +23,9 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.query.Query;
 import org.activiti.engine.query.QueryProperty;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Abstract superclass for all query types.
@@ -204,7 +204,8 @@ public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryP
       if (nullHandlingOnOrder.equals(NullHandlingOnOrder.NULLS_FIRST)) {
 
         if (ProcessEngineConfigurationImpl.DATABASE_TYPE_H2.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_HSQL.equals(databaseType)
-            || ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_ORACLE.equals(databaseType)) {
+            || ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_ORACLE.equals(databaseType)
+                || ProcessEngineConfigurationImpl.DATABASE_TYPE_DM.equals(databaseType)) {
           orderBy = orderBy + defaultOrderByClause + " NULLS FIRST";
         } else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_MYSQL.equals(databaseType)) {
           orderBy = orderBy + "isnull(" + column + ") desc," + defaultOrderByClause;
@@ -217,7 +218,8 @@ public abstract class AbstractQuery<T extends Query<?, ?>, U> extends ListQueryP
       } else if (nullHandlingOnOrder.equals(NullHandlingOnOrder.NULLS_LAST)) {
 
         if (ProcessEngineConfigurationImpl.DATABASE_TYPE_H2.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_HSQL.equals(databaseType)
-            || ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_ORACLE.equals(databaseType)) {
+            || ProcessEngineConfigurationImpl.DATABASE_TYPE_POSTGRES.equals(databaseType) || ProcessEngineConfigurationImpl.DATABASE_TYPE_ORACLE.equals(databaseType)
+                || ProcessEngineConfigurationImpl.DATABASE_TYPE_DM.equals(databaseType)) {
           orderBy = orderBy + column + " " + sortOrder + " NULLS LAST";
         } else if (ProcessEngineConfigurationImpl.DATABASE_TYPE_MYSQL.equals(databaseType)) {
           orderBy = orderBy + "isnull(" + column + ") asc," + defaultOrderByClause;

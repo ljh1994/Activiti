@@ -41,13 +41,13 @@
   <!-- PROPERTY UPDATE -->
   
   <update id="updateProperty" parameterType="org.activiti.engine.impl.persistence.entity.PropertyEntityImpl">
-    update ${prefix}ACT_GE_PROPERTY
+    update "ganbu1"."ACT_GE_PROPERTY"
     <set>
-      REV_ = #{revisionNext, jdbcType=INTEGER},
-      VALUE_ = #{value, jdbcType=VARCHAR}
+      "REV_" = #{revisionNext, jdbcType=INTEGER},
+      "VALUE_" = #{value, jdbcType=VARCHAR}
     </set>
-    where NAME_ = #{name, jdbcType=VARCHAR}
-      and REV_ = #{revision, jdbcType=INTEGER}
+    where "NAME_" = #{name, jdbcType=VARCHAR}
+      and "REV_" = #{revision, jdbcType=INTEGER}
   </update>
 
   <!-- PROPERTY DELETE -->
@@ -70,7 +70,7 @@
   </select>
 
   <select id="selectProperty" parameterType="string" resultMap="propertyResultMap">
-    select * from ${prefix}ACT_GE_PROPERTY where NAME_ = #{name, jdbcType=VARCHAR}
+    select * from "ganbu1"."ACT_GE_PROPERTY" where "NAME_" = #{name, jdbcType=VARCHAR}
   </select>
   
   <select id="selectProperties" resultMap="propertyResultMap">

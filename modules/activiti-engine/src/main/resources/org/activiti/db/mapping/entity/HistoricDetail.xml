@@ -21,7 +21,8 @@
   <!-- HISTORIC DETAILS INSERT -->
   
   <insert id="insertHistoricFormProperty" parameterType="org.activiti.engine.impl.persistence.entity.HistoricFormPropertyEntityImpl">
-    insert into ${prefix}ACT_HI_DETAIL (ID_, TYPE_, PROC_INST_ID_, ACT_INST_ID_, EXECUTION_ID_, TASK_ID_, TIME_, NAME_, TEXT_)
+    insert into "ganbu1"."ACT_HI_DETAIL" ("ID_", "TYPE_", "PROC_INST_ID_", "ACT_INST_ID_",
+     "EXECUTION_ID_", "TASK_ID_", "TIME_", "NAME_", "TEXT_")
     values (
       #{id, jdbcType=VARCHAR},
       'FormProperty',
@@ -36,8 +37,9 @@
   </insert>
 
   <insert id="bulkInsertHistoricFormProperty" parameterType="java.util.List">
-    insert into ${prefix}ACT_HI_DETAIL (ID_, TYPE_, PROC_INST_ID_, ACT_INST_ID_, EXECUTION_ID_, TASK_ID_, TIME_, NAME_, TEXT_)
-    values 
+    insert into "ganbu1"."ACT_HI_DETAIL" ("ID_", "TYPE_", "PROC_INST_ID_", "ACT_INST_ID_",
+      "EXECUTION_ID_", "TASK_ID_", "TIME_", "NAME_", "TEXT_")
+    values
     <foreach collection="list" item="historicFormProperty" index="index" separator=",">
       (#{historicFormProperty.id, jdbcType=VARCHAR},
        #{historicFormProperty.detailType, jdbcType=VARCHAR},
@@ -54,7 +56,9 @@
   <insert id="bulkInsertHistoricFormProperty" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
     <foreach collection="list" item="historicFormProperty" index="index">
-      INTO ${prefix}ACT_HI_DETAIL (ID_, TYPE_, PROC_INST_ID_, ACT_INST_ID_, EXECUTION_ID_, TASK_ID_, TIME_, NAME_, TEXT_) VALUES 
+      INTO "ganbu1"."ACT_HI_DETAIL" ("ID_", "TYPE_", "PROC_INST_ID_", "ACT_INST_ID_",
+        "EXECUTION_ID_", "TASK_ID_", "TIME_", "NAME_", "TEXT_")
+      VALUES
         (#{historicFormProperty.id, jdbcType=VARCHAR},
          #{historicFormProperty.detailType, jdbcType=VARCHAR},
          #{historicFormProperty.processInstanceId, jdbcType=VARCHAR},
@@ -69,7 +73,9 @@
   </insert>
   
   <insert id="insertHistoricDetailVariableInstanceUpdate" parameterType="org.activiti.engine.impl.persistence.entity.HistoricDetailVariableInstanceUpdateEntityImpl">
-    insert into ${prefix}ACT_HI_DETAIL (ID_, TYPE_, PROC_INST_ID_, EXECUTION_ID_, ACT_INST_ID_, TASK_ID_, NAME_, REV_, VAR_TYPE_, TIME_, BYTEARRAY_ID_, DOUBLE_, LONG_ , TEXT_, TEXT2_)
+    insert into "ganbu1"."ACT_HI_DETAIL" ("ID_", "TYPE_", "PROC_INST_ID_",
+    "EXECUTION_ID_", "ACT_INST_ID_", "TASK_ID_", "NAME_", "REV_", "VAR_TYPE_",
+     "TIME_", "BYTEARRAY_ID_", "DOUBLE_", "LONG_ ", "TEXT_", "TEXT2_")
     values (
       #{id, jdbcType=VARCHAR},
       'VariableUpdate',
@@ -90,7 +96,9 @@
   </insert>
   
   <insert id="bulkInsertHistoricDetailVariableInstanceUpdate" parameterType="java.util.List">
-    insert into ${prefix}ACT_HI_DETAIL (ID_, TYPE_, PROC_INST_ID_, EXECUTION_ID_, ACT_INST_ID_, TASK_ID_, NAME_, REV_, VAR_TYPE_, TIME_, BYTEARRAY_ID_, DOUBLE_, LONG_ , TEXT_, TEXT2_)
+    insert into "ganbu1"."ACT_HI_DETAIL" ("ID_", "TYPE_", "PROC_INST_ID_",
+      "EXECUTION_ID_", "ACT_INST_ID_", "TASK_ID_", "NAME_", "REV_", "VAR_TYPE_",
+      "TIME_", "BYTEARRAY_ID_", "DOUBLE_", "LONG_ ", "TEXT_", "TEXT2_")
     values 
       <foreach collection="list" item="historicDetailVariableInstance" index="index" separator=",">
         (#{historicDetailVariableInstance.id, jdbcType=VARCHAR},
@@ -114,8 +122,10 @@
   <insert id="bulkInsertHistoricDetailVariableInstanceUpdate" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="historicDetailVariableInstance" index="index">
-        INTO ${prefix}ACT_HI_DETAIL (ID_, TYPE_, PROC_INST_ID_, EXECUTION_ID_, ACT_INST_ID_, TASK_ID_,
-        NAME_, REV_, VAR_TYPE_, TIME_, BYTEARRAY_ID_, DOUBLE_, LONG_ , TEXT_, TEXT2_) VALUES 
+        INTO "ganbu1"."ACT_HI_DETAIL" ("ID_", "TYPE_", "PROC_INST_ID_",
+              "EXECUTION_ID_", "ACT_INST_ID_", "TASK_ID_", "NAME_", "REV_", "VAR_TYPE_",
+              "TIME_", "BYTEARRAY_ID_", "DOUBLE_", "LONG_ ", "TEXT_", "TEXT2_")
+        VALUES
             (#{historicDetailVariableInstance.id, jdbcType=VARCHAR},
              #{historicDetailVariableInstance.detailType, jdbcType=VARCHAR},
              #{historicDetailVariableInstance.processInstanceId, jdbcType=VARCHAR},
@@ -138,19 +148,19 @@
   <!-- HISTORIC DETAILS DELETE -->
 
   <delete id="deleteHistoricDetailAssignment">
-    delete from ${prefix}ACT_HI_DETAIL where ID_ = #{id}
+    delete from "ganbu1"."ACT_HI_DETAIL" where "ID_" = #{id}
   </delete>
   
   <delete id="deleteHistoricDetailTransitionInstance">
-    delete from ${prefix}ACT_HI_DETAIL where ID_ = #{id}
+    delete from "ganbu1"."ACT_HI_DETAIL" where "ID_" = #{id}
   </delete>
   
   <delete id="deleteHistoricDetailVariableInstanceUpdate">
-    delete from ${prefix}ACT_HI_DETAIL where ID_ = #{id}
+    delete from "ganbu1"."ACT_HI_DETAIL" where "ID_" = #{id}
   </delete>
   
   <delete id="deleteHistoricFormProperty">
-    delete from ${prefix}ACT_HI_DETAIL where ID_ = #{id}
+    delete from "ganbu1"."ACT_HI_DETAIL" where "ID_" = #{id}
   </delete>
   
   <!-- HISTORIC DETAILS RESULTMAP -->
@@ -187,13 +197,13 @@
   <!-- HISTORIC VARIABLE SELECT -->
   
   <select id="selectHistoricDetailByProcessInstanceId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="historicDetailResultMap">
-    select * from ${prefix}ACT_HI_DETAIL
-    where PROC_INST_ID_ = #{parameter}
+    select * from "ganbu1"."ACT_HI_DETAIL"
+    where "PROC_INST_ID_" = #{parameter}
   </select>
   
   <select id="selectHistoricDetailByTaskId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="historicDetailResultMap">
-    select * from ${prefix}ACT_HI_DETAIL
-    where TASK_ID_ = #{parameter}
+    select * from "ganbu1"."ACT_HI_DETAIL"
+    where "TASK_ID_" = #{parameter}
   </select>
 
   <select id="selectHistoricDetailsByQueryCriteria" parameterType="org.activiti.engine.impl.HistoricDetailQueryImpl" resultMap="historicDetailResultMap">
@@ -205,41 +215,41 @@
   </select>
   
   <select id="selectHistoricDetailCountByQueryCriteria" parameterType="org.activiti.engine.impl.HistoricDetailQueryImpl" resultType="long">
-    select count(RES.ID_)
+    select count(RES."ID_")
     <include refid="selectHistoricDetailsByQueryCriteriaSql"/>
   </select>
   
   <sql id="selectHistoricDetailsByQueryCriteriaSql">
-    from ${prefix}ACT_HI_DETAIL RES
+    from "ganbu1"."ACT_HI_DETAIL" RES
     <where>
       <if test="id != null">
-        RES.ID_ = #{id}
+        RES."ID_" = #{id}
       </if>
       <if test="processInstanceId != null">
-        RES.PROC_INST_ID_ = #{processInstanceId}
+        RES."PROC_INST_ID_" = #{processInstanceId}
       </if>
       <if test="executionId != null">
-        RES.EXECUTION_ID_ = #{executionId}
+        RES."EXECUTION_ID_" = #{executionId}
       </if>
       <if test="activityId != null">
-        and RES.ACT_INST_ID_ = #{activityId}
+        and RES."ACT_INST_ID_" = #{activityId}
       </if>
       <if test="activityInstanceId != null">
-        and RES.ACT_INST_ID_ = #{activityInstanceId}
+        and RES."ACT_INST_ID_" = #{activityInstanceId}
       </if>
       <choose>
         <when test="taskId != null">
-          and RES.TASK_ID_ = #{taskId}
+          and RES."TASK_ID_" = #{taskId}
         </when>
         <otherwise>
           <if test="excludeTaskRelated">
-           and RES.TASK_ID_ is null
+           and RES."TASK_ID_" is null
          </if>
         </otherwise>
       </choose>
       
       <if test="type != null">
-        and RES.TYPE_ = #{type}
+        and RES."TYPE_" = #{type}
       </if>
     </where>
   </sql>

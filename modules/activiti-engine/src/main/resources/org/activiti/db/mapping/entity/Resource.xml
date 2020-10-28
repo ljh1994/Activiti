@@ -7,12 +7,12 @@
   <!-- RESOURCE INSERT -->
 
   <insert id="insertResource" parameterType="org.activiti.engine.impl.persistence.entity.ResourceEntityImpl">
-    insert into ${prefix}ACT_GE_BYTEARRAY(ID_, REV_, NAME_, BYTES_, DEPLOYMENT_ID_, GENERATED_)
+    insert into "ganbu1"."ACT_GE_BYTEARRAY"("ID_", "REV_", "NAME_", "BYTES_", "DEPLOYMENT_ID_", "GENERATED_")
     values (#{id, jdbcType=VARCHAR}, 1, #{name, jdbcType=VARCHAR}, #{bytes, jdbcType=${blobType}}, #{deploymentId, jdbcType=VARCHAR}, #{generated, jdbcType=BOOLEAN})  
   </insert>
 
   <insert id="bulkInsertResource" parameterType="java.util.List">
-    INSERT INTO ${prefix}ACT_GE_BYTEARRAY(ID_, REV_, NAME_, BYTES_, DEPLOYMENT_ID_, GENERATED_) VALUES 
+    INSERT INTO "ganbu1"."ACT_GE_BYTEARRAY"("ID_", "REV_", "NAME_", "BYTES_", "DEPLOYMENT_ID_", "GENERATED_") VALUES
       <foreach collection="list" item="byteArr" index="index" separator=","> 
         (#{byteArr.id, jdbcType=VARCHAR},
          1,

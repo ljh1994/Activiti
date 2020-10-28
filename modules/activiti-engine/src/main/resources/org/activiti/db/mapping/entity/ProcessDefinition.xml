@@ -7,7 +7,9 @@
   <!-- PROCESSDEFINITION INSERT -->
 
   <insert id="insertProcessDefinition" parameterType="org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntityImpl">
-    insert into ${prefix}ACT_RE_PROCDEF(ID_, REV_, CATEGORY_, NAME_, KEY_, VERSION_, DEPLOYMENT_ID_, RESOURCE_NAME_, DGRM_RESOURCE_NAME_, DESCRIPTION_, HAS_START_FORM_KEY_, HAS_GRAPHICAL_NOTATION_ , SUSPENSION_STATE_, TENANT_ID_, ENGINE_VERSION_)
+    insert into "ganbu1"."ACT_RE_PROCDEF"("ID_", "REV_", "CATEGORY_", "NAME_", "KEY_",
+              "VERSION_", "DEPLOYMENT_ID_", "RESOURCE_NAME_", "DGRM_RESOURCE_NAME_", "DESCRIPTION_",
+              "HAS_START_FORM_KEY_", "HAS_GRAPHICAL_NOTATION_", "SUSPENSION_STATE_", "TENANT_ID_", "ENGINE_VERSION_")
     values (#{id, jdbcType=VARCHAR},
     		1,
             #{category, jdbcType=VARCHAR},
@@ -26,7 +28,9 @@
   </insert>
 
   <insert id="bulkInsertProcessDefinition" parameterType="java.util.List">
-    INSERT INTO ${prefix}ACT_RE_PROCDEF(ID_, REV_, CATEGORY_, NAME_, KEY_, VERSION_, DEPLOYMENT_ID_, RESOURCE_NAME_, DGRM_RESOURCE_NAME_, DESCRIPTION_, HAS_START_FORM_KEY_, HAS_GRAPHICAL_NOTATION_ , SUSPENSION_STATE_, TENANT_ID_, ENGINE_VERSION_)
+    INSERT INTO "ganbu1"."ACT_RE_PROCDEF"("ID_", "REV_", "CATEGORY_", "NAME_", "KEY_",
+                "VERSION_", "DEPLOYMENT_ID_", "RESOURCE_NAME_", "DGRM_RESOURCE_NAME_", "DESCRIPTION_",
+                "HAS_START_FORM_KEY_", "HAS_GRAPHICAL_NOTATION_", "SUSPENSION_STATE_", "TENANT_ID_", "ENGINE_VERSION_")
     VALUES 
       <foreach collection="list" item="processDefinition" index="index" separator=","> 
         (#{processDefinition.id, jdbcType=VARCHAR},
@@ -285,10 +289,10 @@
     
   <select id="selectLatestProcessDefinitionByKey" parameterType="string" resultMap="processDefinitionResultMap">
     select *
-    from ${prefix}ACT_RE_PROCDEF 
-    where KEY_ = #{key} and
-          (TENANT_ID_ = ''  or TENANT_ID_ is null) and
-          VERSION_ = (select max(VERSION_) from ${prefix}ACT_RE_PROCDEF where KEY_ = #{processDefinitionKey} and (TENANT_ID_ = '' or TENANT_ID_ is null))
+    from "ganbu1"."ACT_RE_PROCDEF"
+    where "KEY_" = #{key} and
+          ("TENANT_ID_" = ''  or "TENANT_ID_" is null) and
+          "VERSION_" = (select max("VERSION_") from "ganbu1"."ACT_RE_PROCDEF" where "KEY_" = #{processDefinitionKey} and ("TENANT_ID_" = '' or "TENANT_ID_" is null))
   </select>
   
   <select id="selectLatestProcessDefinitionByKeyAndTenantId" parameterType="map" resultMap="processDefinitionResultMap">

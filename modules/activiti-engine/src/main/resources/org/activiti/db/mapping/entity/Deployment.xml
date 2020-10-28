@@ -7,12 +7,12 @@
   <!-- DEPLOYMENT INSERT -->
   
   <insert id="insertDeployment" parameterType="org.activiti.engine.impl.persistence.entity.DeploymentEntityImpl">
-    insert into ${prefix}ACT_RE_DEPLOYMENT(ID_, NAME_, CATEGORY_, KEY_, TENANT_ID_, DEPLOY_TIME_, ENGINE_VERSION_)
+    insert into "ganbu1"."ACT_RE_DEPLOYMENT"("ID_", "NAME_", "CATEGORY_", "KEY_", "TENANT_ID_", "DEPLOY_TIME_", "ENGINE_VERSION_")
     values(#{id, jdbcType=VARCHAR}, #{name, jdbcType=VARCHAR}, #{category, jdbcType=VARCHAR}, #{key, jdbcType=VARCHAR}, #{tenantId, jdbcType=VARCHAR}, #{deploymentTime, jdbcType=TIMESTAMP}, #{engineVersion, jdbcType=VARCHAR})
   </insert>
 
   <insert id="bulkInsertDeployment" parameterType="java.util.List">
-    insert into ${prefix}ACT_RE_DEPLOYMENT(ID_, NAME_, CATEGORY_, KEY_, TENANT_ID_, DEPLOY_TIME_)
+    insert into "ganbu1"."ACT_RE_DEPLOYMENT"("ID_", "NAME_", "CATEGORY_", "KEY_", "TENANT_ID_", "DEPLOY_TIME_")
     values
       <foreach collection="list" item="deployment" index="index" separator=",">
         (#{deployment.id, jdbcType=VARCHAR},
@@ -27,7 +27,7 @@
   <insert id="bulkInsertDeployment" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="deployment" index="index">
-        into ${prefix}ACT_RE_DEPLOYMENT(ID_, NAME_, CATEGORY_, KEY_, TENANT_ID_, DEPLOY_TIME_) VALUES 
+        into "ganbu1"."ACT_RE_DEPLOYMENT"("ID_", "NAME_", "CATEGORY_", "KEY_", "TENANT_ID_", "DEPLOY_TIME_") VALUES
           (#{deployment.id, jdbcType=VARCHAR},
            #{deployment.name, jdbcType=VARCHAR},
            #{deployment.category, jdbcType=VARCHAR},
@@ -41,17 +41,17 @@
   <!-- DEPLOYMENT UPDATE -->
   
   <update id="updateDeployment" parameterType="org.activiti.engine.impl.persistence.entity.DeploymentEntityImpl">
-    update ${prefix}ACT_RE_DEPLOYMENT set
-      CATEGORY_ = #{category, jdbcType=VARCHAR},
-      KEY_ = #{key, jdbcType=VARCHAR},
-      TENANT_ID_ = #{tenantId, jdbcType=VARCHAR}
-    where ID_ = #{id, jdbcType=VARCHAR}
+    update "ganbu1"."ACT_RE_DEPLOYMENT" set
+      "CATEGORY_" = #{category, jdbcType=VARCHAR},
+      "KEY_" = #{key, jdbcType=VARCHAR},
+      "TENANT_ID_" = #{tenantId, jdbcType=VARCHAR}
+    where "ID_" = #{id, jdbcType=VARCHAR}
   </update>
   
   <!-- DEPLOYMENT DELETE -->
   
   <delete id="deleteDeployment" parameterType="string">
-    delete from ${prefix}ACT_RE_DEPLOYMENT where ID_ = #{id}
+    delete from "ganbu1"."ACT_RE_DEPLOYMENT" where "ID_" = #{id}
   </delete>
 
   <!-- DEPLOYMENT RESULTMAP -->
@@ -77,68 +77,68 @@
   </select>
 
   <select id="selectDeploymentCountByQueryCriteria" parameterType="org.activiti.engine.impl.DeploymentQueryImpl" resultType="long">
-    select count(distinct RES.ID_)
+    select count(distinct RES."ID_")
     <include refid="selectDeploymentsByQueryCriteriaSql"/>
   </select>
   
   <sql id="selectDeploymentsByQueryCriteriaSql">  
-    from ${prefix}ACT_RE_DEPLOYMENT RES
+    from "ganbu1"."ACT_RE_DEPLOYMENT" RES
     <if test="processDefinitionKey != null or processDefinitionKeyLike != null">
-    	inner join ${prefix}ACT_RE_PROCDEF PROCDEF on RES.ID_ = PROCDEF.DEPLOYMENT_ID_
+    	inner join "ganbu1"."ACT_RE_PROCDEF" PROCDEF on RES."ID_" = PROCDEF."DEPLOYMENT_ID_"
     </if>
     <where>
       <if test="deploymentId != null">
-        RES.ID_ = #{deploymentId}
+        RES."ID_" = #{deploymentId}
       </if>
       <if test="name != null">
-        and RES.NAME_ = #{name}
+        and RES."NAME_" = #{name}
       </if>
       <if test="nameLike != null">
-        and RES.NAME_ like #{nameLike}${wildcardEscapeClause}
+        and RES."NAME_" like #{nameLike}${wildcardEscapeClause}
       </if>
       <if test="category != null">
-        and RES.CATEGORY_ = #{category}
+        and RES."CATEGORY_" = #{category}
       </if>
       <if test="categoryLike != null">
-        and RES.CATEGORY_ like #{categoryLike}${wildcardEscapeClause}
+        and RES."CATEGORY_" like #{categoryLike}${wildcardEscapeClause}
       </if>
       <if test="categoryNotEquals != null">
-        and ( RES.CATEGORY_ &lt;&gt; #{categoryNotEquals} OR RES.CATEGORY_ is null )  
+        and ( RES."CATEGORY_" &lt;&gt; #{categoryNotEquals} OR RES."CATEGORY_" is null )
       </if>
       <if test="key != null">
-        and RES.KEY_ = #{key}
+        and RES."KEY_" = #{key}
       </if>
       <if test="keyLike != null">
-        and RES.KEY_ like #{keyLike}${wildcardEscapeClause}
+        and RES."KEY_" like #{keyLike}${wildcardEscapeClause}
       </if>
       <if test="tenantId != null">
-        and RES.TENANT_ID_ = #{tenantId}
+        and RES."TENANT_ID_" = #{tenantId}
       </if>
       <if test="tenantIdLike != null">
-        and RES.TENANT_ID_ like #{tenantIdLike}${wildcardEscapeClause}
+        and RES."TENANT_ID_" like #{tenantIdLike}${wildcardEscapeClause}
       </if>
       <if test="withoutTenantId">
-        and (RES.TENANT_ID_ = '' or RES.TENANT_ID_ is null)
+        and (RES."TENANT_ID_" = '' or RES."TENANT_ID_" is null)
       </if>
       <if test="processDefinitionKey != null">
-        and PROCDEF.KEY_ = #{processDefinitionKey}
+        and PROCDEF."KEY_" = #{processDefinitionKey}
       </if>
       <if test="processDefinitionKeyLike != null">
-        and PROCDEF.KEY_ like #{processDefinitionKeyLike}${wildcardEscapeClause}
+        and PROCDEF."KEY_" like #{processDefinitionKeyLike}${wildcardEscapeClause}
       </if>
       <if test="latest">
-        and RES.DEPLOY_TIME_ = (select max(DEPLOY_TIME_) from ${prefix}ACT_RE_DEPLOYMENT where KEY_ = RES.KEY_ 
+        and RES."DEPLOY_TIME_" = (select max("DEPLOY_TIME_") from "ganbu1"."ACT_RE_DEPLOYMENT" where "KEY_" = RES."KEY_"
              <if test="tenantId != null">
-	           and TENANT_ID_ = #{tenantId}
+	           and "TENANT_ID_" = #{tenantId}
 	         </if>
 	         <if test="tenantIdLike != null">
-	           and TENANT_ID_ like #{tenantIdLike}${wildcardEscapeClause}
+	           and "TENANT_ID_" like #{tenantIdLike}${wildcardEscapeClause}
 	         </if>
 	         <if test="withoutTenantId">
-	           and (TENANT_ID_ = '' or TENANT_ID_ is null)
+	           and ("TENANT_ID_" = '' or "TENANT_ID_" is null)
 	         </if>
 	         <if test="tenantId == null and tenantIdLike == null and !withoutTenantId">
-	           and ( (TENANT_ID_ IS NOT NULL and TENANT_ID_ = RES.TENANT_ID_) or (TENANT_ID_ IS NULL and RES.TENANT_ID_ IS NULL) )
+	           and ( ("TENANT_ID_" IS NOT NULL and "TENANT_ID_" = RES."TENANT_ID_") or ("TENANT_ID_" IS NULL and RES."TENANT_ID_" IS NULL) )
 	         </if>
         )
       </if>
@@ -146,11 +146,11 @@
   </sql>
     
   <select id="selectDeploymentsByName" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="deploymentResultMap">
-    select * from ${prefix}ACT_RE_DEPLOYMENT D where NAME_=#{parameter} order by D.DEPLOY_TIME_ desc
+    select * from "ganbu1"."ACT_RE_DEPLOYMENT" D where "NAME_"=#{parameter} order by D."DEPLOY_TIME_" desc
   </select>
   
   <select id="selectDeployment" parameterType="string" resultMap="deploymentResultMap">
-    select * from ${prefix}ACT_RE_DEPLOYMENT where ID_ = #{id, jdbcType=VARCHAR}
+    select * from "ganbu1"."ACT_RE_DEPLOYMENT" where "ID_" = #{id, jdbcType=VARCHAR}
   </select>
 
   <!-- mysql specific -->
@@ -164,7 +164,7 @@
   
   <!-- mysql specific -->
   <select id="selectDeploymentCountByQueryCriteria" databaseId="mysql" parameterType="org.activiti.engine.impl.DeploymentQueryImpl" resultType="long">
-    select distinct count(RES.ID_)
+    select distinct count(RES."ID_")
     <include refid="selectDeploymentsByQueryCriteriaSql"/>
   </select>
 

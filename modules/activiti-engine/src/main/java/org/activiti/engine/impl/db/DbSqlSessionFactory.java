@@ -13,11 +13,6 @@
 
 package org.activiti.engine.impl.db;
 
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.impl.cfg.IdGenerator;
 import org.activiti.engine.impl.interceptor.CommandContext;
@@ -26,6 +21,11 @@ import org.activiti.engine.impl.interceptor.SessionFactory;
 import org.activiti.engine.impl.persistence.entity.Entity;
 import org.activiti.engine.impl.persistence.entity.EventLogEntryEntityImpl;
 import org.apache.ibatis.session.SqlSessionFactory;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Tom Baeyens
@@ -182,7 +182,7 @@ public class DbSqlSessionFactory implements SessionFactory {
   	}
 
   	// Only Oracle is making a fuss in one specific case right now
-		if ("oracle".equals(databaseType)) {
+		if ("oracle".equals(databaseType) || "dm".equals(databaseType)) {
 			bulkInsertableMap.put(EventLogEntryEntityImpl.class, Boolean.FALSE);
 		}
   }

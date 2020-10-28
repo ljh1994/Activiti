@@ -7,7 +7,7 @@
   <!-- INSERT -->
 
   <insert id="insertEventLogEntry" parameterType="org.activiti.engine.impl.persistence.entity.EventLogEntryEntityImpl">
-    insert into ${prefix}ACT_EVT_LOG(TYPE_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_, TIME_STAMP_, USER_ID_, DATA_, LOCK_OWNER_, LOCK_TIME_, IS_PROCESSED_)
+    insert into "ganbu1"."ACT_EVT_LOG"("TYPE_", "PROC_DEF_ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_", "TIME_STAMP_", "USER_ID_", "DATA_", "LOCK_OWNER_", "LOCK_TIME_", "IS_PROCESSED_")
     values (
       #{type, jdbcType=VARCHAR}, 
       #{processDefinitionId, jdbcType=VARCHAR}, 
@@ -24,7 +24,7 @@
   </insert>
   
   <insert id="bulkInsertEventLogEntry" parameterType="java.util.List">
-    insert into ${prefix}ACT_EVT_LOG(TYPE_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_, TIME_STAMP_, USER_ID_, DATA_, LOCK_OWNER_, LOCK_TIME_, IS_PROCESSED_)
+    insert into "ganbu1"."ACT_EVT_LOG"("TYPE_", "PROC_DEF_ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_", "TIME_STAMP_", "USER_ID_", "DATA_", "LOCK_OWNER_", "LOCK_TIME_", "IS_PROCESSED_")
     values 
       <foreach collection="list" item="eventLogEntry" index="index" separator=",">
         (#{eventLogEntry.type, jdbcType=VARCHAR}, 
@@ -42,9 +42,9 @@
   </insert>
 
   <insert id="insertEventLogEntry" databaseId="oracle" parameterType="org.activiti.engine.impl.persistence.entity.EventLogEntryEntity">
-    insert into ${prefix}ACT_EVT_LOG(LOG_NR_, TYPE_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_, TIME_STAMP_, USER_ID_, DATA_, LOCK_OWNER_, LOCK_TIME_, IS_PROCESSED_)
+    insert into "ganbu1"."ACT_EVT_LOG"("LOG_NR_", "TYPE_", "PROC_DEF_ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_", "TIME_STAMP_", "USER_ID_", "DATA_", "LOCK_OWNER_", "LOCK_TIME_", "IS_PROCESSED_")
     values (
-      ${prefix}ACT_EVT_LOG_seq.nextVal,
+      "ganbu1"."ACT_EVT_LOG_seq".nextVal,
       #{type, jdbcType=VARCHAR}, 
       #{processDefinitionId, jdbcType=VARCHAR}, 
       #{processInstanceId, jdbcType=VARCHAR},
@@ -62,9 +62,9 @@
   <insert id="bulkInsertEventLogEntry" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="eventLogEntry" index="index">
-        into ${prefix}ACT_EVT_LOG(LOG_NR_, TYPE_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_,
-        TIME_STAMP_, USER_ID_, DATA_, LOCK_OWNER_, LOCK_TIME_, IS_PROCESSED_) VALUES 
-            (${prefix}ACT_EVT_LOG_seq.nextVal,
+        into "ganbu1"."ACT_EVT_LOG"("LOG_NR_", "TYPE_", "PROC_DEF_ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_",
+          "TIME_STAMP_", "USER_ID_", "DATA_", "LOCK_OWNER_", "LOCK_TIME_", "IS_PROCESSED_") VALUES
+            ("ganbu1"."ACT_EVT_LOG_seq".nextVal,
              #{eventLogEntry.type, jdbcType=VARCHAR}, 
              #{eventLogEntry.processDefinitionId, jdbcType=VARCHAR}, 
              #{eventLogEntry.processInstanceId, jdbcType=VARCHAR},
@@ -101,25 +101,25 @@
   <!-- SELECTS -->
   
   <select id="selectAllEventLogEntries" resultMap="eventLogEntryResultMap">
-    select * from ${prefix}ACT_EVT_LOG ORDER BY LOG_NR_
+    select * from "ganbu1"."ACT_EVT_LOG" ORDER BY "LOG_NR_"
   </select>
   
   <select id="selectEventLogEntries" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="eventLogEntryResultMap">
-    select * from ${prefix}ACT_EVT_LOG 
-    WHERE LOG_NR_ &gt; #{parameter.startLogNr}
-    AND LOG_NR_ &lt; #{parameter.endLogNr}
-    ORDER BY LOG_NR_ 
+    select * from "ganbu1"."ACT_EVT_LOG" 
+    WHERE "LOG_NR_" &gt; #{parameter.startLogNr}
+    AND "LOG_NR_" &lt; #{parameter.endLogNr}
+    ORDER BY "LOG_NR_"
   </select>
   
   <select id="selectEventLogEntriesByProcessInstanceId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="eventLogEntryResultMap">
-    select * from ${prefix}ACT_EVT_LOG 
-    WHERE PROC_INST_ID_ = #{parameter.processInstanceId}
-    ORDER BY LOG_NR_ 
+    select * from "ganbu1"."ACT_EVT_LOG" 
+    WHERE "PROC_INST_ID_" = #{parameter.processInstanceId}
+    ORDER BY "LOG_NR_"
   </select>
   
   <!-- DELETE -->
   <delete id="deleteEventLogEntry" parameterType="long">
-    delete from ${prefix}ACT_EVT_LOG where LOG_NR_ = #{logNr}
+    delete from "ganbu1"."ACT_EVT_LOG" where "LOG_NR_" = #{logNr}
   </delete>
 
 </mapper>

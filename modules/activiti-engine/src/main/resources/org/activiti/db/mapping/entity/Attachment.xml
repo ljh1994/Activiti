@@ -21,7 +21,7 @@
   <!-- ATTACHMENT INSERT -->
 
   <insert id="insertAttachment" parameterType="org.activiti.engine.impl.persistence.entity.AttachmentEntityImpl">
-    insert into ${prefix}ACT_HI_ATTACHMENT (ID_, REV_, USER_ID_, NAME_, DESCRIPTION_, TYPE_, TASK_ID_, PROC_INST_ID_, URL_, CONTENT_ID_, TIME_)
+    insert into "ganbu1"."ACT_HI_ATTACHMENT" ("ID_", "REV_", "USER_ID_", "NAME_", "DESCRIPTION_", "TYPE_", "TASK_ID_", "PROC_INST_ID_", "URL_", "CONTENT_ID_", "TIME_")
     values (
       #{id ,jdbcType=VARCHAR},
       1,
@@ -38,7 +38,7 @@
   </insert>
 
   <insert id="bulkInsertAttachment" parameterType="java.util.List">
-    insert into ${prefix}ACT_HI_ATTACHMENT (ID_, REV_, USER_ID_, NAME_, DESCRIPTION_, TYPE_, TASK_ID_, PROC_INST_ID_, URL_, CONTENT_ID_, TIME_)
+    insert into "ganbu1"."ACT_HI_ATTACHMENT" ("ID_", "REV_", "USER_ID_", "NAME_", "DESCRIPTION_", "TYPE_", "TASK_ID_", "PROC_INST_ID_", "URL_", "CONTENT_ID_", "TIME_")
     values 
       <foreach collection="list" item="attachment" index="index" separator=","> 
         (#{attachment.id ,jdbcType=VARCHAR},
@@ -58,7 +58,7 @@
   <insert id="bulkInsertAttachment" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="attachment" index="index"> 
-        INTO ${prefix}ACT_HI_ATTACHMENT (ID_, REV_, USER_ID_, NAME_, DESCRIPTION_, TYPE_, TASK_ID_, PROC_INST_ID_, URL_, CONTENT_ID_, TIME_) VALUES 
+        INTO "ganbu1"."ACT_HI_ATTACHMENT" ("ID_", "REV_", "USER_ID_", "NAME_", "DESCRIPTION_", "TYPE_", "TASK_ID_", "PROC_INST_ID_", "URL_", "CONTENT_ID_", "TIME_") VALUES
           (#{attachment.id ,jdbcType=VARCHAR},
            1,
            #{attachment.userId ,jdbcType=VARCHAR},
@@ -77,20 +77,20 @@
   <!-- ATTACHMENT UPDATE -->
 
   <update id="updateAttachment" parameterType="org.activiti.engine.impl.persistence.entity.AttachmentEntityImpl">
-    update ${prefix}ACT_HI_ATTACHMENT 
+    update "ganbu1"."ACT_HI_ATTACHMENT" 
     set
-      REV_ = #{revisionNext, jdbcType=INTEGER},
-      NAME_ = #{name, jdbcType=VARCHAR},
-      DESCRIPTION_ = #{description, jdbcType=TIMESTAMP}
-    where ID_ = #{id}
-      and REV_ = #{revision, jdbcType=INTEGER}
+      "REV_" = #{revisionNext, jdbcType=INTEGER},
+      "NAME_" = #{name, jdbcType=VARCHAR},
+      "DESCRIPTION_" = #{description, jdbcType=TIMESTAMP}
+    where "ID_" = #{id}
+      and "REV_" = #{revision, jdbcType=INTEGER}
   </update>
 
   <!-- ATTACHMENT DELETE -->
 
   <delete id="deleteAttachment" parameterType="org.activiti.engine.impl.persistence.entity.AttachmentEntityImpl">
-    delete from ${prefix}ACT_HI_ATTACHMENT 
-    where ID_ = #{id} and REV_ = #{revision} 
+    delete from "ganbu1"."ACT_HI_ATTACHMENT" 
+    where "ID_" = #{id} and "REV_" = #{revision}
   </delete>
   
   <!-- ATTACHMENT RESULTMAP -->
@@ -113,22 +113,22 @@
 
   <select id="selectAttachment" parameterType="string" resultMap="attachmentResultMap">
     select *
-    from ${prefix}ACT_HI_ATTACHMENT
-    where ID_ = #{id,jdbcType=VARCHAR}
+    from "ganbu1"."ACT_HI_ATTACHMENT"
+    where "ID_" = #{id,jdbcType=VARCHAR}
   </select>
   
   <select id="selectAttachmentsByTaskId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="attachmentResultMap">
     select *
-    from ${prefix}ACT_HI_ATTACHMENT
-    where TASK_ID_ = #{parameter,jdbcType=VARCHAR}
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_ATTACHMENT"
+    where "TASK_ID_" = #{parameter,jdbcType=VARCHAR}
+    order by "TIME_" desc
   </select>
   
   <select id="selectAttachmentsByProcessInstanceId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="attachmentResultMap">
     select *
-    from ${prefix}ACT_HI_ATTACHMENT
-    where PROC_INST_ID_ = #{parameter,jdbcType=VARCHAR}
-    order by TIME_ desc
+    from "ganbu1"."ACT_HI_ATTACHMENT"
+    where "PROC_INST_ID_" = #{parameter,jdbcType=VARCHAR}
+    order by "TIME_" desc
   </select>
 
 </mapper>
