@@ -397,122 +397,122 @@
       </if>
       
       <if test="orQueryObject.deploymentId != null || (orQueryObject.deploymentIds != null &amp;&amp; orQueryObject.deploymentIds.size() &gt; 0)">
-        left outer join ${prefix}ACT_RE_PROCDEF DEPLOY_P_OR${orIndex} ON RES.PROC_DEF_ID_ = DEPLOY_P_OR${orIndex}.ID_
+        left outer join "ganbu1"."ACT_RE_PROCDEF" DEPLOY_P_OR${orIndex} ON RES."PROC_DEF_ID_" = DEPLOY_P_OR${orIndex}."ID_"
       </if>
     </foreach>
     
     <if test="processDefinitionKey != null || processDefinitionKeyLike != null ||  processDefinitionKeyLikeIgnoreCase != null || processDefinitionName != null || processDefinitionNameLike != null || (processCategoryInList != null &amp;&amp; processCategoryInList.size() &gt; 0) || (processCategoryNotInList != null &amp;&amp; processCategoryNotInList.size() &gt; 0) || (processDefinitionKeys != null &amp;&amp; processDefinitionKeys.size() &gt; 0)">
-      inner join ${prefix}ACT_RE_PROCDEF D on RES.PROC_DEF_ID_ = D.ID_
+      inner join "ganbu1"."ACT_RE_PROCDEF" D on RES."PROC_DEF_ID_" = D."ID_"
     </if>
     <if test="processInstanceBusinessKey != null || processInstanceBusinessKeyLike != null  || processInstanceBusinessKeyLikeIgnoreCase != null">
-      inner join ${prefix}ACT_RU_EXECUTION E on RES.PROC_INST_ID_ = E.ID_
+      inner join "ganbu1"."ACT_RU_EXECUTION" E on RES."PROC_INST_ID_" = E."ID_"
     </if>
     <if test="deploymentId != null || (deploymentIds != null &amp;&amp; deploymentIds.size() &gt; 0)">
-      left outer join ${prefix}ACT_RE_PROCDEF DEPLOY_P ON RES.PROC_DEF_ID_ = DEPLOY_P.ID_
+      left outer join "ganbu1"."ACT_RE_PROCDEF DEPLOY_P" ON RES."PROC_DEF_ID_" = "DEPLOY_P.ID_"
     </if>
     <where> 
       <if test="taskId != null">
-        RES.ID_ = #{taskId}
+        RES."ID_" = #{taskId}
       </if>
       <if test="name != null">
-        and RES.NAME_ = #{name}
+        and RES."NAME_" = #{name}
       </if>
       <if test="nameLike != null">
-        and RES.NAME_ like #{nameLike}${wildcardEscapeClause}
+        and RES."NAME_" like #{nameLike}${wildcardEscapeClause}
       </if>
       <if test="nameLikeIgnoreCase != null">
-        and lower(RES.NAME_) like #{nameLikeIgnoreCase}${wildcardEscapeClause}
+        and lower(RES."NAME_") like #{nameLikeIgnoreCase}${wildcardEscapeClause}
       </if>
       <if test="nameList != null &amp;&amp; nameList.size() &gt; 0">
-        and RES.NAME_ IN
+        and RES."NAME_" IN
         <foreach item="name" index="index" collection="nameList"
                  open="(" separator="," close=")">
           #{name}
         </foreach>
       </if>
       <if test="nameListIgnoreCase != null &amp;&amp; nameListIgnoreCase.size() &gt; 0">
-        and lower(RES.NAME_) IN
+        and lower(RES."NAME_") IN
         <foreach item="name" index="index" collection="nameListIgnoreCase"
                  open="(" separator="," close=")">
           #{name}
         </foreach>
       </if>
       <if test="description != null">
-        and RES.DESCRIPTION_ = #{description}
+        and RES."DESCRIPTION_" = #{description}
       </if>
       <if test="descriptionLike != null">
-        and RES.DESCRIPTION_ like #{descriptionLike}${wildcardEscapeClause}
+        and RES."DESCRIPTION_" like #{descriptionLike}${wildcardEscapeClause}
       </if>
       <if test="descriptionLikeIgnoreCase != null">
-        and lower(RES.DESCRIPTION_) like #{descriptionLikeIgnoreCase}${wildcardEscapeClause}
+        and lower(RES."DESCRIPTION_") like #{descriptionLikeIgnoreCase}${wildcardEscapeClause}
       </if>
       <if test="priority != null">
-        and RES.PRIORITY_ = #{priority}
+        and RES."PRIORITY_" = #{priority}
       </if> 
       <if test="minPriority != null">
-        and RES.PRIORITY_ &gt;= #{minPriority}
+        and RES."PRIORITY_" &gt;= #{minPriority}
       </if> 
       <if test="maxPriority != null">
-        and RES.PRIORITY_ &lt;= #{maxPriority}
+        and RES."PRIORITY_" &lt;= #{maxPriority}
       </if> 
       <if test="assignee != null">
-        and RES.ASSIGNEE_ = #{assignee}
+        and RES."ASSIGNEE_" = #{assignee}
       </if>
       <if test="assigneeLike != null">
-        and RES.ASSIGNEE_ like #{assigneeLike}${wildcardEscapeClause}
+        and RES."ASSIGNEE_" like #{assigneeLike}${wildcardEscapeClause}
       </if>
       <if test="assigneeLikeIgnoreCase != null">
-        and lower(RES.ASSIGNEE_) like #{assigneeLikeIgnoreCase}${wildcardEscapeClause}
+        and lower(RES."ASSIGNEE_") like #{assigneeLikeIgnoreCase}${wildcardEscapeClause}
       </if>
       <if test="assigneeIds != null &amp;&amp; assigneeIds.size() &gt; 0">
-        and RES.ASSIGNEE_ IN
+        and RES."ASSIGNEE_" IN
         <foreach item="assigneeId" index="index" collection="assigneeIds" 
                  open="(" separator="," close=")">
           #{assigneeId}
         </foreach>
 	  </if>
       <if test="owner != null">
-        and RES.OWNER_ = #{owner}
+        and RES."OWNER_" = #{owner}
       </if>
       <if test="ownerLike != null">
-        and RES.OWNER_ like #{ownerLike}${wildcardEscapeClause}
+        and RES."OWNER_" like #{ownerLike}${wildcardEscapeClause}
       </if>
        <if test="ownerLikeIgnoreCase != null">
-        and lower(RES.OWNER_) like #{ownerLikeIgnoreCase}${wildcardEscapeClause}
+        and lower(RES."OWNER_") like #{ownerLikeIgnoreCase}${wildcardEscapeClause}
       </if>
       <if test="unassigned">
-        and RES.ASSIGNEE_ IS NULL
+        and RES."ASSIGNEE_" IS NULL
       </if>
       <if test="noDelegationState">
-        and RES.DELEGATION_ IS NULL
+        and RES."DELEGATION_" IS NULL
       </if>
       <if test="delegationState != null">
-        and RES.DELEGATION_ = #{delegationStateString}
+        and RES."DELEGATION_" = #{delegationStateString}
       </if>
       <if test="processInstanceId != null">
-        and RES.PROC_INST_ID_ = #{processInstanceId}
+        and RES."PROC_INST_ID_" = #{processInstanceId}
       </if>
       <if test="processInstanceIds != null &amp;&amp; processInstanceIds.size() &gt; 0">
-        and RES.PROC_INST_ID_ IN
+        and RES."PROC_INST_ID_" IN
         <foreach item="processInstance" index="index" collection="processInstanceIds" 
                  open="(" separator="," close=")">
           #{processInstance}
         </foreach>
       </if>
       <if test="processInstanceBusinessKey != null">
-        and E.BUSINESS_KEY_ = #{processInstanceBusinessKey}
+        and E."BUSINESS_KEY_" = #{processInstanceBusinessKey}
       </if>
       <if test="processInstanceBusinessKeyLike != null">
-        and E.BUSINESS_KEY_ like #{processInstanceBusinessKeyLike}${wildcardEscapeClause}
+        and E."BUSINESS_KEY_" like #{processInstanceBusinessKeyLike}${wildcardEscapeClause}
       </if>      
       <if test="processInstanceBusinessKeyLikeIgnoreCase != null">
-        and lower(E.BUSINESS_KEY_) like #{processInstanceBusinessKeyLikeIgnoreCase}${wildcardEscapeClause}
+        and lower(E."BUSINESS_KEY_") like #{processInstanceBusinessKeyLikeIgnoreCase}${wildcardEscapeClause}
       </if>         
       <if test="executionId != null">
-        and RES.EXECUTION_ID_ = #{executionId}
+        and RES."EXECUTION_ID_" = #{executionId}
       </if>
       <if test="createTime != null">
-        and RES.CREATE_TIME_ = #{createTime}
+        and RES."CREATE_TIME_" = #{createTime}
       </if>
       <if test="createTimeBefore != null">
         and RES.CREATE_TIME_ &lt; #{createTimeBefore}
