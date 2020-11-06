@@ -7,10 +7,10 @@
   <!-- PROPERTY INSERT -->
   
   <insert id="insertProperty" parameterType="org.activiti.engine.impl.persistence.entity.PropertyEntityImpl">
-      insert into ${prefix}ACT_GE_PROPERTY (
-        NAME_,
-        VALUE_,
-        REV_
+      insert into "ganbu1"."ACT_GE_PROPERTY" (
+        "NAME_",
+        "VALUE_",
+        "REV_"
       ) values (
         #{name ,jdbcType=VARCHAR},
         #{value, jdbcType=VARCHAR},
@@ -19,7 +19,7 @@
   </insert>
 
   <insert id="bulkInsertProperty" parameterType="java.util.List">
-      INSERT INTO ${prefix}ACT_GE_PROPERTY (NAME_, VALUE_, REV_) VALUES 
+      INSERT INTO "ganbu1"."ACT_GE_PROPERTY" ("NAME_", "VALUE_", "REV_") VALUES
       <foreach collection="list" item="property" index="index" separator=","> 
         (#{property.name ,jdbcType=VARCHAR},
          #{property.value, jdbcType=VARCHAR},
@@ -30,7 +30,7 @@
   <insert id="bulkInsertProperty" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
     <foreach collection="list" item="property" index="index">
-      INTO ${prefix}ACT_GE_PROPERTY (NAME_, VALUE_, REV_) VALUES
+      INTO "ganbu1"."ACT_GE_PROPERTY" ("NAME_", "VALUE_", "REV_") VALUES
       (#{property.name ,jdbcType=VARCHAR},
        #{property.value, jdbcType=VARCHAR},
        1)
@@ -53,7 +53,7 @@
   <!-- PROPERTY DELETE -->
   
   <delete id="deleteProperty" parameterType="org.activiti.engine.impl.persistence.entity.PropertyEntityImpl">
-    delete from ${prefix}ACT_GE_PROPERTY where NAME_ = #{name} and REV_ = #{revision}
+    delete from "ganbu1"."ACT_GE_PROPERTY" where "NAME_" = #{name} and "REV_" = #{revision}
   </delete>
 
 
@@ -66,7 +66,7 @@
   </resultMap>
   
   <select id="selectDbSchemaVersion" resultType="string">
-    select VALUE_ from ${prefix}ACT_GE_PROPERTY where NAME_ = 'schema.version'
+    select "VALUE_" from "ganbu1"."ACT_GE_PROPERTY" where "NAME_" = 'schema.version'
   </select>
 
   <select id="selectProperty" parameterType="string" resultMap="propertyResultMap">
@@ -74,7 +74,7 @@
   </select>
   
   <select id="selectProperties" resultMap="propertyResultMap">
-    select * from ${prefix}ACT_GE_PROPERTY 
+    select * from "ganbu1"."ACT_GE_PROPERTY" 
   </select>
   
 </mapper>

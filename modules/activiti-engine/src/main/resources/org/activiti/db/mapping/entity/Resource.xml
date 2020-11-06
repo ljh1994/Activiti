@@ -26,7 +26,7 @@
   <insert id="bulkInsertResource" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL
       <foreach collection="list" item="resource" index="index"> 
-        INTO ${prefix}ACT_GE_BYTEARRAY(ID_, REV_, NAME_, BYTES_, DEPLOYMENT_ID_, GENERATED_) VALUES 
+        INTO "ganbu1"."ACT_GE_BYTEARRAY"("ID_", "REV_", "NAME_", "BYTES_", "DEPLOYMENT_ID_", "GENERATED_") VALUES
         (#{resource.id, jdbcType=VARCHAR},
          1,
          #{resource.name, jdbcType=VARCHAR},
@@ -42,7 +42,7 @@
   <!-- RESOURCE DELETE -->
 
   <delete id="deleteResourcesByDeploymentId" parameterType="string">
-    delete from ${prefix}ACT_GE_BYTEARRAY where DEPLOYMENT_ID_ = #{id}
+    delete from "ganbu1"."ACT_GE_BYTEARRAY" where "DEPLOYMENT_ID_" = #{id}
   </delete>
   
   <!-- RESOURCE RESULTMAP -->
@@ -57,17 +57,17 @@
   <!-- RESOURCE SELECT -->
 
   <select id="selectResourceNamesByDeploymentId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultType="string">
-    select NAME_ from ${prefix}ACT_GE_BYTEARRAY where DEPLOYMENT_ID_ = #{parameter} order by NAME_ asc
+    select NAME_ from "ganbu1"."ACT_GE_BYTEARRAY" where "DEPLOYMENT_ID_" = #{parameter} order by "NAME_" asc
   </select>
   
   <select id="selectResourceByDeploymentIdAndResourceName" parameterType="map" resultMap="resourceResultMap">
-    select * from ${prefix}ACT_GE_BYTEARRAY 
-    where DEPLOYMENT_ID_ = #{deploymentId}
-          AND NAME_ = #{resourceName}
+    select * from "ganbu1"."ACT_GE_BYTEARRAY" 
+    where "DEPLOYMENT_ID_" = #{deploymentId}
+          AND "NAME_" = #{resourceName}
   </select>
 
   <select id="selectResourcesByDeploymentId" parameterType="org.activiti.engine.impl.db.ListQueryParameterObject" resultMap="resourceResultMap">
-    select * from ${prefix}ACT_GE_BYTEARRAY where DEPLOYMENT_ID_ = #{parameter} order by NAME_ asc
+    select * from "ganbu1"."ACT_GE_BYTEARRAY" where "DEPLOYMENT_ID_" = #{parameter} order by "NAME_" asc
   </select>  
   
 </mapper>

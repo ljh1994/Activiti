@@ -21,7 +21,8 @@
   <!-- HISTORIC PROCESS VARIABLE INSERT -->
   
   <insert id="insertHistoricVariableInstance" parameterType="org.activiti.engine.impl.persistence.entity.HistoricVariableInstanceEntityImpl">
-    insert into ${prefix}ACT_HI_VARINST (ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_, NAME_, REV_, VAR_TYPE_, BYTEARRAY_ID_, DOUBLE_, LONG_ , TEXT_, TEXT2_, CREATE_TIME_, LAST_UPDATED_TIME_)
+    insert into "ganbu1"."ACT_HI_VARINST" ("ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_", "NAME_", "REV_",
+    "VAR_TYPE_", "BYTEARRAY_ID_", "DOUBLE_", "LONG_" , "TEXT_", "TEXT2_", "CREATE_TIME_", "LAST_UPDATED_TIME_")
     values (
       #{id, jdbcType=VARCHAR},
       #{processInstanceId, jdbcType=VARCHAR},
@@ -41,7 +42,8 @@
   </insert>
 
   <insert id="bulkInsertHistoricVariableInstance" parameterType="java.util.List">
-    insert into ${prefix}ACT_HI_VARINST (ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_, NAME_, REV_, VAR_TYPE_, BYTEARRAY_ID_, DOUBLE_, LONG_ , TEXT_, TEXT2_, CREATE_TIME_, LAST_UPDATED_TIME_)
+    insert into "ganbu1"."ACT_HI_VARINST" ("ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_", "NAME_", "REV_",
+    "VAR_TYPE_", "BYTEARRAY_ID_", "DOUBLE_", "LONG_" , "TEXT_", "TEXT2_", "CREATE_TIME_", "LAST_UPDATED_TIME_")
     values 
       <foreach collection="list" item="historicVariable" index="index" separator=",">
         (#{historicVariable.id, jdbcType=VARCHAR},
@@ -64,8 +66,9 @@
   <insert id="bulkInsertHistoricVariableInstance" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
       <foreach collection="list" item="historicVariable" index="index">
-      INTO ${prefix}ACT_HI_VARINST (ID_, PROC_INST_ID_, EXECUTION_ID_, TASK_ID_, NAME_, REV_,
-      VAR_TYPE_, BYTEARRAY_ID_, DOUBLE_, LONG_ , TEXT_, TEXT2_, CREATE_TIME_, LAST_UPDATED_TIME_) VALUES 
+      INTO "ganbu1"."ACT_HI_VARINST" ("ID_", "PROC_INST_ID_", "EXECUTION_ID_", "TASK_ID_", "NAME_", "REV_",
+        "VAR_TYPE_", "BYTEARRAY_ID_", "DOUBLE_", "LONG_" , "TEXT_", "TEXT2_", "CREATE_TIME_", "LAST_UPDATED_TIME_")
+        VALUES
           (#{historicVariable.id, jdbcType=VARCHAR},
            #{historicVariable.processInstanceId, jdbcType=VARCHAR},
            #{historicVariable.executionId, jdbcType=VARCHAR},
@@ -87,29 +90,29 @@
   <!-- HISTORIC PROCESS VARIABLE UPDATE -->
   
   <update id="updateHistoricVariableInstance" parameterType="org.activiti.engine.impl.persistence.entity.HistoricVariableInstanceEntityImpl">
-    update ${prefix}ACT_HI_VARINST set
-      REV_ = #{revisionNext, jdbcType=INTEGER},
-      BYTEARRAY_ID_ = #{byteArrayRef, typeHandler=ByteArrayRefTypeHandler},
-      DOUBLE_ = #{doubleValue, jdbcType=DOUBLE},
-      LONG_ = #{longValue, jdbcType=BIGINT},
-      TEXT_ = #{textValue, jdbcType=VARCHAR},
-      TEXT2_ = #{textValue2, jdbcType=VARCHAR},
-      VAR_TYPE_ = #{variableType, jdbcType=VARCHAR},
-      LAST_UPDATED_TIME_ = #{lastUpdatedTime, jdbcType=TIMESTAMP}
-    where ID_ = #{id, jdbcType=VARCHAR}
-      and REV_ = #{revision, jdbcType=INTEGER}
+    update "ganbu1"."ACT_HI_VARINST" set
+      "REV_" = #{revisionNext, jdbcType=INTEGER},
+      "BYTEARRAY_ID_" = #{byteArrayRef, typeHandler=ByteArrayRefTypeHandler},
+      "DOUBLE_" = #{doubleValue, jdbcType=DOUBLE},
+      "LONG_" = #{longValue, jdbcType=BIGINT},
+      "TEXT_" = #{textValue, jdbcType=VARCHAR},
+      "TEXT2_" = #{textValue2, jdbcType=VARCHAR},
+      "VAR_TYPE_" = #{variableType, jdbcType=VARCHAR},
+      "LAST_UPDATED_TIME_" = #{lastUpdatedTime, jdbcType=TIMESTAMP}
+    where "ID_" = #{id, jdbcType=VARCHAR}
+      and "REV_" = #{revision, jdbcType=INTEGER}
   </update>
   
   <!-- HISTORIC PROCESS VARIABLE DELETE -->
 
   <delete id="deleteHistoricVariableInstance" parameterType="org.activiti.engine.impl.persistence.entity.HistoricVariableInstanceEntityImpl">
-    delete from ${prefix}ACT_HI_VARINST where ID_ = #{id} and REV_ = #{revision}
+    delete from "ganbu1"."ACT_HI_VARINST" where "ID_" = #{id} and "REV_" = #{revision}
   </delete>
   
   <delete id="bulkDeleteHistoricVariableInstance" parameterType="java.util.Collection">
-    delete from ${prefix}ACT_HI_VARINST where 
+    delete from "ganbu1"."ACT_HI_VARINST" where 
     <foreach item="variable" collection="list" index="index" separator=" or ">
-        ID_ = #{variable.id, jdbcType=VARCHAR}
+        "ID_" = #{variable.id, jdbcType=VARCHAR}
     </foreach>
   </delete>
   
@@ -142,55 +145,55 @@
   </select>
   
   <select id="selectHistoricVariableInstanceCountByQueryCriteria" parameterType="org.activiti.engine.impl.HistoricVariableInstanceQueryImpl" resultType="long">
-    select count(RES.ID_)
+    select count(RES."ID_")
     <include refid="selectHistoricVariableInstanceByQueryCriteriaSql"/>
   </select>
   
   <sql id="selectHistoricVariableInstanceByQueryCriteriaSql">
-    from ${prefix}ACT_HI_VARINST RES
+    from "ganbu1"."ACT_HI_VARINST" RES
     <where>
       <if test="id != null">
-        RES.ID_ = #{id}
+        RES."ID_" = #{id}
       </if>
       <if test="processInstanceId != null">
-        and RES.PROC_INST_ID_ = #{processInstanceId}
+        and RES."PROC_INST_ID_" = #{processInstanceId}
       </if>
       <if test="executionId != null">
-        and RES.EXECUTION_ID_ = #{executionId}
+        and RES."EXECUTION_ID_" = #{executionId}
       </if>
       <if test="executionIds != null and !executionIds.isEmpty()">
-          and RES.EXECUTION_ID_ in
+          and RES."EXECUTION_ID_" in
           <foreach item="item" index="index" collection="executionIds" open="(" separator="," close=")">
             #{item}
           </foreach>
       </if>
       <if test="taskId != null">
-        and RES.TASK_ID_ = #{taskId}
+        and RES."TASK_ID_" = #{taskId}
       </if>
       <if test="taskIds != null and !taskIds.isEmpty()">
-          and RES.TASK_ID_ in
+          and RES."TASK_ID_" in
           <foreach item="item" index="index" collection="taskIds" open="(" separator="," close=")">
             #{item}
           </foreach>
       </if>
       <if test="excludeTaskRelated">
-        and RES.TASK_ID_ is NULL
+        and RES."TASK_ID_" is NULL
       </if>
       <if test="variableName != null">
-        and RES.NAME_ = #{variableName}
+        and RES."NAME_" = #{variableName}
       </if>
       <if test="variableNameLike != null">
-        and RES.NAME_ like #{variableNameLike}${wildcardEscapeClause}
+        and RES."NAME_" like #{variableNameLike}${wildcardEscapeClause}
       </if>
       
       <!-- PLEASE NOTE: If you change anything have a look into the Execution, the same query object is used there! -->
       <if test="queryVariableValue != null" >
         <if test="!queryVariableValue.type.equals('null')">
         <!-- When operator is not-equals or type of value is null, type doesn't matter! -->
-          and RES.VAR_TYPE_ = #{queryVariableValue.type}
+          and RES."VAR_TYPE_" = #{queryVariableValue.type}
         </if>
         <if test="queryVariableValue.textValue != null &amp;&amp; queryVariableValue.longValue == null &amp;&amp; queryVariableValue.doubleValue == null">
-        and RES.TEXT_
+        and RES."TEXT_"
         <choose>
           <when test="queryVariableValue.operator.equals('LIKE') || queryVariableValue.operator.equals('LIKE_IGNORE_CASE')">LIKE</when>
           <otherwise><include refid="executionVariableOperator" /></otherwise>
@@ -212,12 +215,12 @@
           </choose>
         </if>
         <if test="queryVariableValue.longValue != null">
-        and RES.LONG_
+        and RES."LONG_"
         <include refid="executionVariableOperator" />
         #{queryVariableValue.longValue}
         </if>
         <if test="queryVariableValue.doubleValue != null">
-        and RES.DOUBLE_
+        and RES."DOUBLE_"
         <include refid="executionVariableOperator" />
         #{queryVariableValue.doubleValue}
         </if>
@@ -225,10 +228,10 @@
         <if test="queryVariableValue.textValue == null &amp;&amp; queryVariableValue.textValue2 == null &amp;&amp; queryVariableValue.longValue == null &amp;&amp; queryVariableValue.doubleValue == null">
           <choose>
           <when test="queryVariableValue.operator.equals('NOT_EQUALS')">
-            and (RES.TEXT_ is not null or RES.TEXT2_ is not null or RES.LONG_ is not null or RES.DOUBLE_ is not null or RES.BYTEARRAY_ID_ is not null)
+            and (RES."TEXT_" is not null or RES."TEXT2_" is not null or RES."LONG_" is not null or RES."DOUBLE_" is not null or RES."BYTEARRAY_ID_" is not null)
           </when>
           <otherwise>
-        and RES.TEXT_ is null and RES.TEXT2_ is null and RES.LONG_ is null and RES.DOUBLE_ is null and RES.BYTEARRAY_ID_ is null
+        and RES."TEXT_" is null and RES."TEXT2_" is null and RES."LONG_" is null and RES."DOUBLE_" is null and RES."BYTEARRAY_ID_" is null
           </otherwise>
         </choose>
         </if>
@@ -248,15 +251,15 @@
   </sql>
   
   <select id="selectHistoricVariableInstanceByVariableInstanceId" resultMap="historicProcessVariableResultMap">
-    select * from ${prefix}ACT_HI_VARINST where ID_ = #{variableInstanceId}
+    select * from "ganbu1"."ACT_HI_VARINST" where "ID_" = #{variableInstanceId}
   </select>
   
   <select id="selectHistoricVariableInstanceByProcessInstanceId" resultMap="historicProcessVariableResultMap">
-    select * from ${prefix}ACT_HI_VARINST where PROC_INST_ID_ = #{parameter}
+    select * from "ganbu1"."ACT_HI_VARINST" where "PROC_INST_ID_" = #{parameter}
   </select>
   
   <select id="selectHistoricVariableInstanceByTaskId" resultMap="historicProcessVariableResultMap">
-    select * from ${prefix}ACT_HI_VARINST where TASK_ID_ = #{parameter}
+    select * from "ganbu1"."ACT_HI_VARINST" where "TASK_ID_" = #{parameter}
   </select>
 
   <select id="selectHistoricVariableInstanceByNativeQuery" parameterType="java.util.Map" resultMap="historicProcessVariableResultMap">

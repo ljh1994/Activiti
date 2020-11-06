@@ -70,7 +70,7 @@
           "ASSIGNEE_",
           "START_TIME_",
           "END_TIME_",
-          "DURATION"_,
+          "DURATION_",
           "DELETE_REASON_",
           "TENANT_ID_"
       ) values 

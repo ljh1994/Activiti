@@ -7,7 +7,7 @@
   <!-- MEMBERSHIP INSERT -->
 
   <insert id="insertMembership" parameterType="map">
-    insert into ${prefix}ACT_ID_MEMBERSHIP (USER_ID_, GROUP_ID_)
+    insert into "ganbu1"."ACT_ID_MEMBERSHIP" ("USER_ID_", "GROUP_ID_")
     values (
       #{userId ,jdbcType=VARCHAR},
       #{groupId ,jdbcType=VARCHAR}
@@ -15,7 +15,7 @@
   </insert>
 
   <insert id="bulkInsertMembership" parameterType="java.util.List">
-    INSERT INTO ${prefix}ACT_ID_MEMBERSHIP (USER_ID_, GROUP_ID_)
+    INSERT INTO "ganbu1"."ACT_ID_MEMBERSHIP" ("USER_ID_", "GROUP_ID_")
     VALUES 
     <foreach collection="list" item="membership" index="index" separator=","> 
       (#{membership.userId ,jdbcType=VARCHAR},
@@ -26,7 +26,7 @@
   <insert id="bulkInsertMembership" databaseId="oracle" parameterType="java.util.List">
     INSERT ALL 
     <foreach collection="list" item="membership" index="index">
-      INTO ${prefix}ACT_ID_MEMBERSHIP (USER_ID_, GROUP_ID_) VALUES  
+      INTO "ganbu1"."ACT_ID_MEMBERSHIP" ("USER_ID_", "GROUP_ID_") VALUES
         (#{membership.userId ,jdbcType=VARCHAR},
          #{membership.groupId ,jdbcType=VARCHAR})
     </foreach>
@@ -38,14 +38,14 @@
   <!-- MEMBERSHIP DELETE -->
 
   <delete id="deleteMembershipsByUserId" parameterType="string">
-    delete from ${prefix}ACT_ID_MEMBERSHIP 
-    where USER_ID_ = #{userId} 
+    delete from "ganbu1"."ACT_ID_MEMBERSHIP" 
+    where "USER_ID_" = #{userId}
   </delete>
 
   <delete id="deleteMembership" parameterType="map">
-    delete from ${prefix}ACT_ID_MEMBERSHIP 
-    where USER_ID_ = #{userId}
-      and GROUP_ID_ = #{groupId} 
+    delete from "ganbu1"."ACT_ID_MEMBERSHIP" 
+    where "USER_ID_" = #{userId}
+      and "GROUP_ID_" = #{groupId}
   </delete>
 
   <!-- MEMBERSHIP RESULTMAP -->
@@ -53,8 +53,8 @@
   <!-- MEMBERSHIP DELETE -->
 
   <delete id="deleteMembershipsByGroupId" parameterType="string">
-    delete from ${prefix}ACT_ID_MEMBERSHIP 
-    where GROUP_ID_ = #{groupId} 
+    delete from "ganbu1"."ACT_ID_MEMBERSHIP" 
+    where "GROUP_ID_" = #{groupId}
   </delete>
   
 </mapper>
